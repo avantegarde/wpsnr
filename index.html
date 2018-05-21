@@ -63,7 +63,7 @@ p.intro {
     display: block;
     width: 550px;
     max-width: 100%;
-    margin: 0 auto 30px auto;
+    margin: 0 auto 15px auto;
     padding: 0 15px;
 }
 h3 {
@@ -88,6 +88,14 @@ h3:before {
   position: absolute;
   top: calc(50% - 10px);
   left: 0;
+}
+a,
+a:visited {
+  color: #0073a4;
+}
+a:hover,
+a:focus {
+  color: #ffffff;
 }
 input[type="text"] {
   width: 200px;
@@ -201,6 +209,30 @@ span {
   line-height: 20px;
   vertical-align: top;
 }
+[data-button="more-info"] {
+  font-size: 16px;
+  line-height: 20px;
+}
+#more-info {
+  display: block;
+  width: 650px;
+  max-height: 0px;
+  max-width: 100%;
+  margin: 0 auto 30px auto;
+  padding: 0 15px;
+  overflow: hidden;
+  opacity: 0;
+  transition: all 0.3s ease-in-out;
+  -webkit-transition: all 0.3s ease-in-out;
+}
+#more-info.active {
+  opacity: 1;
+  max-height: 500px;
+}
+h2.title {
+  display: block;
+  margin: 10px 0 0 0;
+}
 </style>
   <!-- START AdSense -->
   <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
@@ -216,6 +248,15 @@ span {
 
   <h1>WordPress SQL Update Queries</h1>
   <p class="intro">Use this tool to help migrate or change your WordPress domain by doing a simple SQL search and replace on your database.</p>
+  <p><em><sup>*</sup>Backup your database before running a search and replace.<sup>*</sup></em></p>
+  <button data-button="more-info" onclick="moreInfo()">More info &#9662;</button>
+  <div id="more-info">
+    <h2 class="title">WordPress Database Switcheroo</h2>
+    <p><em><sup>*</sup>Yes I'll say it again; Backup your database before working on it. <br>It's always a sad day if/when something goes wrong.<sup>*</sup></em></p>
+    <p>Are you looking to do a mass search and replace in WordPress? This tool is designed to change the domain name and urls including the content. Simply add your database prefix, current site url, and new site url into the form and click submit. Copy the output and run it as an SQL command on your database.</p>
+    <p>You might want to consider doing multiple runs with both <em>"http://"</em> and <em>"https://"</em> versions of your domain if you are trying to fix mixed content urls.</p>
+    <p>If you like it, you can star it or fork it <a href="https://github.com/avantegarde/wpsnr" target="_blank">over at GitHub</a></p>
+  </div>
 
   <h3>database prefix</h3>
   <button data-button="local" onclick="addInputText('db', 'wp')" />Default</button>
@@ -255,6 +296,14 @@ function addInputText(id, text) {
   if(id && text) {
     var el = document.getElementById(id);
     el.value = text.toString();
+  }
+}
+function moreInfo() {
+  var more_info = document.getElementById('more-info');
+  if(more_info.classList.contains('active')) {
+      more_info.classList.remove('active');
+  } else {
+      more_info.classList.add('active');
   }
 }
 </script>
